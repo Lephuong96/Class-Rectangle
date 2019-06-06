@@ -8,26 +8,55 @@
     <title>Class Rectangle</title>
     <style type="text/css">
         .content {
-            width: 100%;
+            width: 30%;
+            background-color: lavender;
             color: blue;
             font-size: 30px;
+            margin: 0 auto;
+            padding: 20px;
+
         }
+        .value {
+            padding: 10px;
+            border: blue 8px;
+        }
+        .value h2{
+            color: red;
+        }
+        .value input {
+            height: 30px;
+            padding: 2px;
+        }
+
     </style>
 </head>
 <body>
 <div class="content">
+    <form method="post">
+        <div class="value">
+           <h2>Input Value</h2>
+            Input width rectangle : <br>
+            <input type="text" name="valueWidth" placeholder="width"/>
+            <br>
+            Input height rectangle : <br>
+            <input type="text" name="valueHeight" placeholder="height"/>
+            <br>
+            <input type="submit" value="OK"/>
+        </div>
+    </form>
 <?php
 include "Rectangle.php";
-$width  = 10;
-$height = 20;
+$height = $_POST["valueHeight"];
+$width = $_POST["valueWidth"];
 $rectangle = new Rectangle($width, $height);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-echo "Width Rectangle:" .$rectangle->width. "<br>";
-echo "Height Rectangle:" .$rectangle->height;
-echo "<br>Perimeter:".$rectangle->getPerimeter();
-echo "<br>Area:".$rectangle->getArea();
-echo ("<br>Your Rectangle:". $rectangle->display());
+    echo "<br>Perimeter:" . $rectangle->getPerimeter();
+    echo "<br>Area:" . $rectangle->getArea();
+    echo("<br>Your Rectangle:" . $rectangle->display());
+}
 ?>
 </div>
 </body>
 </html>
+
